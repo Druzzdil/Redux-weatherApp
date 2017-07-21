@@ -1,49 +1,45 @@
 import React, { Component } from 'react';
-import {connect } from 'react-redux';
+import { connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import fetchWeather from '../actions/index';
 
-export default class SearchBar extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            term: ''
-        }
-        this.handleChange  = this.handleChange .bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this)
-    }
+class SearchBar extends Component {
+  constructor(props){
+    super(props);
+    this.state = { term: ''};
+    this.onInputchange = this.onInputchange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
 
+  onInputchange(event) {
+    this.setState({term: event.target.value})
+  }
 
+  onFormSubmit(event){
+    event.preventDefault();
+    this.props.fetchWeather(this.state.term);
+    this.setState({term:''});
+  }
 
-handleChange(event){
-    this.setState({term: event.target.value});
-    console.log(event.target.value)
-}
-
-handleFormSubmit(e){
-    e.preventDefault()
-    // this.setState({term: event.target.value});
-    console.log('ok')
-}
-
-
-  render() {
+  render(){
     return (
-      <div>
-        <form className="form-horizontal" onSubmit={this.handleFormSubmit}>
-            <div className="form-group">
-            <label className="control-label col-sm-2" >Search</label>
-            <div className="col-sm-10">          
-                <input type="text" className="form-control"  value={this.state.term} onChange={this.handleChange} placeholder="get the 5 day forecast in your area"/>
-            </div>
-            </div>
-            <div className="form-group">        
-            <div className="col-sm-offset-2 col-sm-10">
-                <button type="submit" className="btn btn-default">Submit</button>
-            </div>
-            </div>
-        </form>
-      </div>
+      <form onSubmit={this.onFormSubmit} className="input-group">
+        <input
+          placeholder="get a five-day forecast in your favorite cities"
+          className ="form-control"
+          value={this.state.term}
+          onChange={this.onInputchange}
+        />
+        <span className="input-group-btn">
+          <button type="submit" className="btn btn-secondary">Submit</button>
+        </span>
+      </form>
     );
   }
 }
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ fetchWeather }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(SearchBar);
