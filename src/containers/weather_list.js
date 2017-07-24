@@ -28,29 +28,28 @@ renderWeather(cityData){
         <tr key={name}>
             <td>{name}</td>
             <td>
-              <Chart data={temps} color="orange" />
+              <Chart data={temps} color="orange" units="K" />
             </td>
             <td>
-              <Chart data={pressure} color="blue" />
+              <Chart data={pressure} color="blue" units="hPa" />
             </td>
             <td>
-              <Chart data={humidity} color="black" />
+              <Chart data={humidity} color="black" units="%" />
             </td>
         </tr>
     );
 }
 
 render() {
-    console.log(this.props.weather);
     return (
         <div>
             <table className="table table-hover">
                 <thead>
                     <tr>
                         <th>City</th>
-                        <th>Temperature</th>
-                        <th>Pressure</th>
-                        <th>Humidity</th>
+                        <th>Temperature (K)</th>
+                        <th>Pressure (hPa)</th>
+                        <th>Humidity (%)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,8 +57,8 @@ render() {
                 </tbody>
             </table>
         </div>
-    )
-  }
+        )
+    }
 }
 
 
