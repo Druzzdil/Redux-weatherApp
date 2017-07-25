@@ -6,3 +6,6 @@ export default function(state = [], action) {
     }
     return state;
 }
+
+
+// this is reducer

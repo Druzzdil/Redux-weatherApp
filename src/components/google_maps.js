@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
 // import { fetchWeather } from "../actions/index";
-// import weather from '../reducers/index';
+import weather from '../reducers/index';
 
 class GoogleMap extends Component {
   constructor(props) {
@@ -18,7 +18,6 @@ componentDidMount() {
             }
     });
 }
-
  
 render() {
     return (
@@ -32,4 +31,4 @@ render() {
 
 
 
-export default GoogleMap
+export default GoogleMap;
